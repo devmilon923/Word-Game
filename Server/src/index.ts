@@ -14,8 +14,8 @@ io.on("connection", (socket) => {
   socket.on("join-room", (userData) => {
     const socketRoomSize =
       io.sockets.adapter.rooms.get(userData.room)?.size || 0;
-    if (socketRoomSize && socketRoomSize >= 3) {
-      return socket.emit("response", {
+    if (socketRoomSize && socketRoomSize >= 2) {
+      return socket.emit("joinLimit", {
         status: false,
         message: "Room is already full",
       });

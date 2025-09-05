@@ -1,45 +1,3 @@
-// Game data arrays
-
-// Function to render word list
-function renderWordList(playerId, words) {
-  const container = document.getElementById(`${playerId}-words`);
-  container.innerHTML = "";
-  words.forEach((word) => {
-    const wordItem = document.createElement("div");
-    wordItem.className = `word-item${word.isPass ? " pass" : ""}`;
-
-    const wordText = document.createElement("span");
-    wordText.className = "word-text";
-
-    if (word.highlight) {
-      const baseText = word.text.replace(word.highlight, "");
-      const highlightSpan = `<span style="color: ${word.highlightColor};">${word.highlight}</span>`;
-      wordText.innerHTML = baseText + highlightSpan;
-    } else {
-      wordText.textContent = word.text;
-    }
-
-    const wordScore = document.createElement("span");
-    wordScore.className = "word-score";
-
-    const scoreIcon = document.createElement("span");
-    scoreIcon.className = `score-icon${
-      playerId === "ai" ? " ai-score-icon" : ""
-    }`;
-    scoreIcon.textContent = "!";
-
-    wordScore.appendChild(document.createTextNode(word.score));
-    wordScore.appendChild(scoreIcon);
-
-    wordItem.appendChild(wordText);
-    wordItem.appendChild(wordScore);
-    container.appendChild(wordItem);
-  });
-}
-
-
-
-
 function showMessage(message, type = "error") {
   const container = document.getElementById("message-container");
 
@@ -67,13 +25,17 @@ const myname = document.getElementById("myname");
 const roomname = document.getElementById("roomname");
 const submitForm = document.getElementById("submitForm");
 const myscore = document.getElementById("my-score");
+const currentW = document.getElementById("currentWord");
 const otherscore = document.getElementById("other-score");
+const wordDiv = document.getElementById("word");
 const input = document.querySelector(".myinput");
 const myinput = document.querySelector(".me");
 const otherinput = document.querySelector(".other");
 const onput = document.querySelector(".otherinput");
+
 const myName = document.querySelector(".myName");
 const otherName = document.querySelector(".otherName");
+currentW.innerText = currentWord;
 
 myinput.addEventListener("keyup", (e) => {
   socket.emit("steam", e.target.value);
@@ -82,6 +44,12 @@ socket.on("steamResponse", (data) => {
   if (data.id !== userId && onput) {
     onput.placeholder = data.placeholder;
   }
+});
+
+socket.on("joinLimit", () => {
+  joinbtn.innerText = "Join Room";
+  joinbtn.style.backgroundColor = "#1e3a8a";
+  return showMessage(`Your requested room is full`, "info");
 });
 submitForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -117,6 +85,9 @@ joinbtn.addEventListener("click", () => {
   if (roomname.value?.trim() === "") {
     return showMessage("Room name is required", "error");
   }
+
+  wordDiv.style.display = "block";
+
   socket.emit("join-room", {
     name: myname.value,
     room: roomname.value,
@@ -152,10 +123,8 @@ socket.on("response", (data) => {
 
 socket.on("inputResponse", (data) => {
   const isMyTurn = data.data.user !== userId;
-
-  // Update current word
   currentWord = getLastWord(data.data.message);
-
+  currentW.innerText = currentWord;
   if (isMyTurn) {
     myinput.classList.add("activePannel");
     otherinput.classList.remove("activePannel");

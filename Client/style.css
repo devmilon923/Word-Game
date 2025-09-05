@@ -153,13 +153,24 @@ button:disabled {
   color: #047857;
   border: 1px solid #6ee7b7;
 }
-
+#word {
+  display: none;
+  text-align: center;
+  padding: 3px 10px;
+  background-color: #dcdcdc;
+  max-width: fit-content;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 13px;
+}
 #message-container.info {
   background-color: #eff6ff;
   color: #1e3a8a;
   border: 1px solid #93c5fd;
 }
-
+#currentWord {
+  text-align: center;
+}
 /* Responsive Fixes */
 @media (max-width: 768px) {
   .header {
@@ -187,4 +198,27 @@ button:disabled {
   .title-section {
     padding: 24px 10px 10px;
   }
+}
+.how-to-play {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.how-to-play h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.how-to-play ol {
+  padding-left: 20px;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
 }
