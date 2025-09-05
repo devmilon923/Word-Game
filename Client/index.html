@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Game || By Milon</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <input
+        type="text"
+        class="url-bar"
+        placeholder="your name"
+        id="myname"
+        value=""
+      />
+      <input
+        type="text"
+        class="url-bar"
+        placeholder="room name"
+        id="roomname"
+        value=""
+      />
+      <button id="joinbtn">Join Room</button>
+    </div>
+
+    <div class="title-section">
+      <h1 class="title">Word Game</h1>
+    </div>
+
+    <div id="message-container"></div>
+    <div class="game-container">
+      <div class="player-panel me activePannel">
+        <div class="player-header">
+          <div class="avatar">👤</div>
+          <div class="player-name myName"></div>
+        </div>
+        <div class="score" id="my-score">0</div>
+        <form id="submitForm">
+          <input
+            type="text"
+            class="myinput input-area"
+            placeholder="Enter your word..."
+          />
+        </form>
+      </div>
+
+      <div class="player-panel other">
+        <div class="player-header">
+          <div class="avatar">👤</div>
+          <div class="player-name otherName"></div>
+        </div>
+        <div class="score" id="other-score">0</div>
+        <input
+          type="text"
+          class="input-area otherinput"
+          placeholder="Thinking..."
+          readonly
+        />
+      </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
