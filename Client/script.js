@@ -1,53 +1,4 @@
 // Game data arrays
-const gameData = {
-  guest: {
-    score: 164,
-    words: [
-      {
-        text: "tamboys",
-        score: 12,
-      },
-    ],
-  },
-  ai: {
-    score: 0,
-    words: [
-      {
-        text: "tamboys",
-        score: 12,
-      },
-      {
-        text: "grill",
-        score: 8,
-      },
-      {
-        text: "easting",
-
-        score: 12,
-      },
-      {
-        text: "domelike",
-
-        score: 12,
-      },
-      {
-        text: "thicked",
-
-        score: 11,
-      },
-      {
-        text: "embedment",
-
-        score: 12,
-      },
-      {
-        text: "sulphone",
-
-        score: 12,
-      },
-    ],
-  },
-};
 
 // Function to render word list
 function renderWordList(playerId, words) {
@@ -86,27 +37,8 @@ function renderWordList(playerId, words) {
   });
 }
 
-// Function to update scores
-function updateScores() {
-  document.getElementById("guest-score").textContent = gameData.guest.score;
-  document.getElementById("ai-score").textContent = gameData.ai.score;
-}
 
-// Function to add new word
-function addWord(playerId, wordData) {
-  gameData[playerId].words.unshift(wordData);
-  renderWordList(playerId, gameData[playerId].words);
-}
 
-// Initialize the game display
-function initGame() {
-  renderWordList("guest", gameData.guest.words);
-  renderWordList("ai", gameData.ai.words);
-  updateScores();
-}
-
-// Initialize when page loads
-document.addEventListener("DOMContentLoaded", initGame);
 
 function showMessage(message, type = "error") {
   const container = document.getElementById("message-container");
