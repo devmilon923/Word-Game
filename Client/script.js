@@ -18,7 +18,7 @@ function getFirstWord(word) {
   return word.toString().split("")[0];
 }
 let currentWord = "a";
-const socket = io("http://localhost:3000");
+const socket = io("https://word-bound-parsonal.sarv.live");
 const userId = Math.random().toString()?.split(".")[1];
 const joinbtn = document.getElementById("joinbtn");
 const myname = document.getElementById("myname");
